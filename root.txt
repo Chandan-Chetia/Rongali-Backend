@@ -1,0 +1,21 @@
+/your-project-root
+  ├── index.js (main server file)
+  ├── .env
+  ├── /models
+  │   ├── User.js
+  │   ├── Order.js
+  │   └── Product.js
+  ├── /views
+  │   └── /admin
+  │       ├── layout.ejs
+  │       ├── dashboard.ejs
+  │       ├── products.ejs
+  │       ├── orders.ejs
+  │       ├── users.ejs
+  │       └── login.ejs
+  ├── /public
+  │   ├── /css
+  │   │   └── admin.css
+  │   └── /js
+  │       └── admin.js
+  └── package.json

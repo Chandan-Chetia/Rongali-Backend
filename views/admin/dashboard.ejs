@@ -1,0 +1,105 @@
+<% layout('admin/layout') -%>
+
+<div class="row mb-4">
+  <div class="col-md-3">
+    <div class="card text-white bg-primary">
+      <div class="card-body">
+        <h5 class="card-title">Total Products</h5>
+        <p class="card-text display-6"><%= stats.totalProducts %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-white bg-success">
+      <div class="card-body">
+        <h5 class="card-title">Total Orders</h5>
+        <p class="card-text display-6"><%= stats.totalOrders %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-white bg-info">
+      <div class="card-body">
+        <h5 class="card-title">Total Users</h5>
+        <p class="card-text display-6"><%= stats.totalUsers %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-white bg-warning">
+      <div class="card-body">
+        <h5 class="card-title">Total Revenue</h5>
+        <p class="card-text display-6">₹<%= stats.revenue[0]?.total.toFixed(2) || 0 %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h5>Sales Overview</h5>
+      </div>
+      <div class="card-body">
+        <canvas id="salesChart" height="300"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h5>Recent Orders</h5>
+      </div>
+      <div class="card-body">
+        <% if (stats.recentOrders.length > 0) { %>
+          <div class="list-group">
+            <% stats.recentOrders.forEach(order => { %>
+              <a href="/admin/orders/<%= order._id %>" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1">Order #<%= order._id.toString().slice(-6) %></h6>
+                  <small>₹<%= order.total.toFixed(2) %></small>
+                </div>
+                <small class="text-muted"><%= order.user.name %> • <%= order.createdAt.toLocaleDateString() %></small>
+              </a>
+            <% }); %>
+          </div>
+        <% } else { %>
+          <p class="text-muted">No recent orders</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Sales chart
+  const ctx = document.getElementById('salesChart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      datasets: [{
+        label: 'Monthly Sales',
+        data: [12000, 19000, 15000, 18000, 22000, 25000, 28000, 26000, 24000, 21000, 23000, 30000],
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        tension: 0.1,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>

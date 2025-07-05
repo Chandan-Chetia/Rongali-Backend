@@ -1,0 +1,38 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+}
+
+.main-content {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+}
+
+.nav-link {
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card {
+  border: none;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.table th {
+  font-weight: 600;
+  color: #495057;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
