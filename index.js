@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/rongali-t
 }).then(() => console.log('MongoDB connected')).catch(err => console.error('MongoDB error:', err));
 
 // User model
-const User = require('./models/user');
+const User = require('./models/Auser');
 
 // In-memory product data (same as frontend)
 const products = [
